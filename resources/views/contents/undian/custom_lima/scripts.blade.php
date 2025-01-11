@@ -50,62 +50,37 @@
         });
 
         let shuffleData;
-
-        // let lastShuffleData;
-
         function onShuffle() {
-            {{--intervalId = setInterval(() => {--}}
-            {{--    $.ajax({--}}
-            {{--        type: "POST",--}}
-            {{--        url: route('peserta-undian-lima'),--}}
-            {{--        data: {--}}
-            {{--            _token: '{{ csrf_token() }}'--}}
-            {{--        },--}}
-            {{--        success: function(res) {--}}
-            {{--            $('#button-acak-off').hide()--}}
-            {{--            $('#button-acak-on').show()--}}
-            {{--            // lastShuffleData = res;--}}
-            {{--            res.peserta.forEach((peserta, index) => {--}}
-            {{--                $(`#kode-acak-${index + 1}`).text(peserta.nomor_undian)--}}
-            {{--            });--}}
-            {{--        }--}}
-            {{--    });--}}
-            {{--}, 100);--}}
-
             $.get(route('peserta-undian-lima'), (res) => {
-                const getDataToShuffle = res;
-
+                const getDataToShuffle = res.peserta;
                 shuffleData = setInterval(() => {
                     const randomIndices = [];
+                    const peserta = [];
+                    let number = 1;
                     console.clear()
                     while (randomIndices.length < 5) {
-                        const randomIndex = Math.floor(Math.random() * getDataToShuffle.peserta.length);
+                        const randomIndex = Math.floor(Math.random() * getDataToShuffle.length);
                         if (!randomIndices.includes(randomIndex)) {
                             randomIndices.push(randomIndex);
                         }
-
-                        console.log(randomIndex)
+                        $(`#kode-acak-${number}`).text(getDataToShuffle[randomIndex].nomor_undian);
+                        $(`input[name=undian_id_${number}`).val(getDataToShuffle[randomIndex].id);
+                        number++;
                     }
-                    randomIndices.forEach((randomIndex, index) => {
-                        $(`#kode-acak-${index + 1}`).text(getDataToShuffle.peserta[randomIndex].nomor_undian)
-                    })
-                }, 100)
+                }, 50)
             })
 
 
         }
 
         function onStop() {
-            // Clear the interval first
+
             clearInterval(shuffleData);
             let resultOfShuffle = [];
-            for (let i = 1; i < 5; i++) {
-                const text = $(`#kode-acak-${i}`).html();
-                resultOfShuffle.push(text);
-
+            for (let i = 1; i <= 5; i++) {
+                const id =  $(`input[name=undian_id_${i}`).val();
+                resultOfShuffle.push(id);
             }
-            console.log(resultOfShuffle)
-
             $.ajax({
                 url: route('peserta-undian-lima.detail'),
                 data: {
@@ -114,45 +89,12 @@
             }).done((response) => {
                 response.peserta.forEach((peserta, index) => {
                     $(`#kode-acak-${index + 1}`).text(peserta.nomor_undian);
-                    $(`#id-reward-${index + 1}`).text(peserta.id);
                     $(`#noreg-reward-${index + 1}`).text(peserta.nomor_undian);
                     $(`#nama-reward-${index + 1}`).text(peserta.nama_peserta);
                     $(`input[name="undian_id_${index + 1}"]`).val(peserta.id);
-                    $(`#kode-acak-${index + 1}`).text(peserta.nomor_undian)
                 });
             })
-            // $.get(route('peserta-undian-lima.detail'),resultOfShuffle , (res) => {
-            // })
-            // Update button visibility
-            {{--$('#button-acak-off').show();--}}
-            {{--$('#button-acak-on').hide();--}}
-            {{--// $('#button-berhenti').hide();--}}
 
-
-            {{--// if (lastShuffleData && lastShuffleData.peserta) {--}}
-            {{--// Make one final API call to get the final result--}}
-            {{--$.ajax({--}}
-            {{--    type: "POST",--}}
-            {{--    url: route('peserta-undian-lima'),--}}
-            {{--    data: {--}}
-            {{--        _token: '{{ csrf_token() }}'--}}
-            {{--    },--}}
-            {{--    success: function (res) {--}}
-            {{--        lastShuffleData = res;--}}
-            {{--        // Update the display with final results--}}
-            {{--        res.peserta.slice(0, 5).forEach((peserta, index) => {--}}
-            {{--            $(`#kode-acak-${index + 1}`).text(peserta.nomor_undian);--}}
-            {{--            $(`#id-reward-${index + 1}`).text(peserta.id);--}}
-            {{--            $(`#noreg-reward-${index + 1}`).text(peserta.nomor_undian);--}}
-            {{--            $(`#nama-reward-${index + 1}`).text(peserta.nama_peserta);--}}
-            {{--            $(`input[name="undian_id_${index + 1}"]`).val(peserta.id);--}}
-            {{--            $(`#kode-acak-${index + 1}`).text(peserta.nomor_undian)--}}
-            {{--        });--}}
-            {{--    },--}}
-            {{--    error: function () {--}}
-            {{--        alert('Terjadi kesalahan saat mengambil data final');--}}
-            {{--    }--}}
-            {{--});--}}
         }
 
 

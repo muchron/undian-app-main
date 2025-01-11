@@ -185,14 +185,14 @@ Route::post('peserta-undian-lima', function () {
 })->name('peserta-undian-lima');
 
 Route::get('peserta-undian-lima', function () {
-    $peserta = UndianUmumLima::select('nomor_undian')->whereHas('pesertaUmumLima', function($q){
+    $peserta = UndianUmumLima::select('nomor_undian', 'id')->whereHas('pesertaUmumLima', function($q){
         $q->where('status', 0);
     })->get(); // Mengambil 5 peserta secara acak
     return response()->json(['message' => 'peserta undian ditemukan', 'peserta' => $peserta], Response::HTTP_OK);
 })->name('peserta-undian-lima');
 
 Route::get('peserta-undian-lima/detail', function (Request $request) {
-	$peserta = UndianUmumLima::whereIn('nomor_undian', $request->data)->get(); // Mengambil 5 peserta secara acak
+	$peserta = UndianUmumLima::whereIn('id', $request->data)->take(5)->get(); // Mengambil 5 peserta secara acak
 	return response()->json(['message' => 'peserta undian ditemukan', 'peserta' => $peserta], Response::HTTP_OK);
 })->name('peserta-undian-lima.detail');
 
