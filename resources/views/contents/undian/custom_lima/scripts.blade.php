@@ -203,14 +203,16 @@
                 },
                 success: function(res) {
 
+                    console.log('response ===', res);
+
                     res.undianumumlima.forEach(val => { // Limit to 5 participants
 
                         $('#table-list-peserta').append(
                             '<tr>' +
                             '<td class="trow">' +
-                            '<span class="nomor-undian">' + val.undian_umum_lima.nomor_undian +
+                            '<span class="nomor-undian">' + val.undian_umum_lima?.nomor_undian +
                             '</span> <br>' +
-                            '<span class="nama-peserta">' + val.undian_umum_lima.nama_peserta +
+                            '<span class="nama-peserta">' + val.undian_umum_lima?.nama_peserta +
                             '</span>' +
                             '</td>' +
                             '</tr>'
