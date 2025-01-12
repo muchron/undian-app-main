@@ -121,17 +121,18 @@ Route::post('pemenang-undian-umum/store', function (Request $request) {
 })->name('pemenang-undian-umum.store');
 
 
-// Bagian Peserta Grand Price
-// Route::post('peserta-grandprice', function () {
-//     $peserta = UndianGrandprice::inRandomOrder()->take(1)->first();
-//     return response()->json(['message' => 'peserta undian ditemukan', 'peserta' => $peserta], Response::HTTP_OK);
-// })->name('peserta-grandprice');
-Route::post('peserta-grandprice', function () {
-    $peserta = UndianGrandprice::whereHas('pesertaGrandprice', function($q){
+//mengambil semua data peserta grandprise untuk di shuffle menggunakan javascript
+Route::get('peserta-grandprice', function () {
+    $peserta = UndianGrandprice::select(['id', 'nomor_undian'])->whereHas('pesertaGrandprice', function($q){
         $q->where('status', 0);
-    })->inRandomOrder()->take(1)->first(); // Mengambil 1 peserta secara acak
+    })->get(); 
     return response()->json(['message' => 'peserta undian ditemukan', 'peserta' => $peserta], Response::HTTP_OK);
 })->name('peserta-grandprice');
+
+Route::post('peserta-grandprice/detail', function (Request $request) {
+    $peserta = UndianGrandprice::find($request->id);
+    return response()->json(['message' => 'peserta undian ditemukan', 'peserta' => $peserta], Response::HTTP_OK);
+})->name('peserta-grandprice.detail');
 
 Route::post('nomor-undian-grandprice', function (Request $request) {
     $nomorundian = UndianGrandprice::orderBy('nomor_undian', 'ASC')->where('peserta_grandprice_id', $request->peserta_grandprice_id)->get();
@@ -161,14 +162,15 @@ Route::post('pemenang-undian-grandprice/store', function (Request $request) {
             ]);
         }
     }
-    
-    // $undian = UndianGrandprice::find($request->undian_id);
-    // if (!empty($undian)) {
-    //     PesertaGrandPrice::where('id', $undian->peserta_grandprice_id)->update([
-    //         'status' => 1
-    //     ]);
-    // }
+
 })->name('pemenang-undian-grandprice.store');
+
+// Cetak hasil undian grandprize
+Route::get('pemenang-undian-grandprice/print', function (): Response {
+    $undiangrandprice = PemenangUndianGrandprice::with(['undianGrandprice.pesertaGrandPrice'])->orderBy('created_at', 'DESC')->get();
+    $pdf = PDF::loadView('pdf.pemenang-grandprice', ['data' => $undiangrandprice]);
+    return $pdf->stream('pemenangundiangrandprice.pdf');
+})->name('pemenang-undian-grandprice.print');
 
 // Bagian Peserta Umum Lima
 Route::post('peserta-undian-lima', function () {
@@ -227,6 +229,7 @@ Route::post('pemenang-undian-umum-lima/store', function (Request $request) {
     return response()->json('Berhasil');
 })->name('pemenang-undian-umum-lima.store');
 
+// Cetak undian umum lima
 Route::get('pemenang-undian-umum-lima/print', function (Request $request) {
     $undianumum = PemenangUndianUmumLima::with(['undian.pesertaUmumLima'])->orderBy('created_at', 'DESC')->get();
     $pdf = PDF::loadView('pdf.pemenang-umum-lima', ['data' => $undianumum]);

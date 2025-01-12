@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Imports\PesertaGrandprice;
+use App\Models\PesertaGrandPrice;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +23,7 @@ class UndianGrandprice extends Model
      */
     public function pesertaGrandprice(): BelongsTo
     {
-        return $this->belongsTo(PesertaGrandprice::class, 'peserta_grandprice_id');
+        return $this->belongsTo(PesertaGrandPrice::class, 'peserta_grandprice_id');
     }
 
     /**

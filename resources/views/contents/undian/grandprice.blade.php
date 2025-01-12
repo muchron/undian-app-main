@@ -4,14 +4,14 @@
     Undian App
 @endsection
 @section('content')
-   <section id="header">
+    <section id="header">
         <div id="heading">
             <div class="text-center pt-2">
                 <img src="{{ asset('assets/img/logo/bg-header-2.jpg') }}" alt="logo">
             </div>
         </div>
-   </section>
-   <section id="content">
+    </section>
+    <section id="content">
         <div id="kolom">
             <div id="tengah">
                 <div id="kode-acak">
@@ -41,13 +41,14 @@
                     <div style="overflow-y: auto; height: 500px; padding-top: 10px;">
                         <table id="table-list-peserta"></table>
                     </div>
+                    <a href="{{ route('pemenang-undian-grandprice.print') }}" target="_blank" class="btn btn-success mt-2">Cetak/Print</a>
                     <div id="datetimes-content">
-                        <div id="tanggal">29/08/2024</div>
-                        <div id="waktu">16:00:00</div>
+                        <div id="tanggal">{{ date('d/m/Y') }}</div>
+                        <div id="waktu">{{ date('H:i:s') }}</div>
                     </div>
                 </div>
             </div>
         </div>
-   </section>
+    </section>
 @endsection
 @include('contents.undian.custom_grandprice.scripts')

@@ -47,34 +47,42 @@
                 $('#waktu').text(generateTimeNow())
             }, 1000);
             $('#tanggal').text(generateDateNow())
+            dataPesertaGrandprize = getAllDataPesertaGrandprize().responseJSON.peserta;
+
         });
 
-        let intervalId;
+        let dataPesertaGrandprize = ''
+
+        function getAllDataPesertaGrandprize() {
+            return $.ajax({
+                url: route('peserta-grandprice'),
+                async: false,
+                success: function(res) {
+                    return res.peserta
+                }
+            })
+        }
+
+        let shuffleData;
 
         function onShuffle() {
-            intervalId = setInterval(() => {
-                $.ajax({
-                    type: "POST",
-                    url: route('peserta-grandprice'),
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(res) {
-                        $('#button-acak-off').hide()
-                        $('#button-acak-on').show()
-                        $('#kode-acak').text(res.peserta.nomor_undian)
-                    }
-                });
+            shuffleData = setInterval(() => {
+                const randomIndices = [];
+                const peserta = [];
+                const randomIndex = Math.floor(Math.random() * dataPesertaGrandprize.length);
+                $(`#kode-acak`).text(dataPesertaGrandprize[randomIndex].nomor_undian);
+                $(`input[name=undian_id]`).val(dataPesertaGrandprize[randomIndex].id);
             }, 100);
         }
 
         function onStop() {
-            clearInterval(intervalId)
+            clearInterval(shuffleData)
             $.ajax({
                 type: "POST",
-                url: route('peserta-grandprice'),
+                url: route('peserta-grandprice.detail'),
                 data: {
-                    _token: '{{ csrf_token() }}'
+                    _token: '{{ csrf_token() }}',
+                    id: $('input[name=undian_id]').val()
                 },
                 beforeSend: function(res) {
                     $('#button-acak-off').show()
@@ -111,10 +119,18 @@
                         alert('gagal simpan')
                     },
                     success: function(res) {
-                        alert('berhasil simpan')
                         $('input[name="undian_id"]').val('')
                         loadTableUndianGrandprice()
                     }
+                }).done((response) => {
+                    const pemenang = $('#nama-reward').text()
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Selamat Atas Pemenang',
+                        html: `${pemenang}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 });
             }
         }
