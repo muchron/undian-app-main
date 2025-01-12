@@ -1,18 +1,20 @@
 <?php
 
-use App\Http\Controllers\Admin\AuthController;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Route;
+use App\Models\Undian;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use App\Models\PesertaUmum;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\Undian;
-use App\Models\UndianGrandprice;
-use App\Models\PesertaUmum;
+use App\Models\UndianUmumLima;
 use App\Models\PesertaUmumLima;
+use App\Models\UndianGrandprice;
 use App\Models\PesertaGrandPrice;
 use App\Models\PemenangUndianUmum;
+use Illuminate\Support\Facades\Route;
 use App\Models\PemenangUndianUmumLima;
 use App\Models\PemenangUndianGrandprice;
+use App\Http\Controllers\Admin\AuthController;
+use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PesertaUmumController;
 use App\Http\Controllers\Admin\PesertaUmumLimaController;
@@ -20,7 +22,6 @@ use App\Http\Controllers\Admin\PesertaGrandpriceController;
 use App\Http\Controllers\Admin\PemenangUndianUmumController;
 use App\Http\Controllers\Admin\PemenangUndianUmumLimaController;
 use App\Http\Controllers\Admin\PemenangUndianGrandpriceController;
-use App\Models\UndianUmumLima;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,13 +118,6 @@ Route::post('pemenang-undian-umum/store', function (Request $request) {
             ]);
         }
     }
-
-    // $undian = Undian::find($request->undian_id);
-    // if (!empty($undian)) {
-    //     PesertaUmum::where('id', $undian->peserta_umum_id)->update([
-    //         'status' => 1
-    //     ]);
-    // }
 })->name('pemenang-undian-umum.store');
 
 
@@ -184,10 +178,12 @@ Route::post('peserta-undian-lima', function () {
     return response()->json(['message' => 'peserta undian ditemukan', 'peserta' => $peserta], Response::HTTP_OK);
 })->name('peserta-undian-lima');
 
+
+// Mengambil semua data peserta undian lima
 Route::get('peserta-undian-lima', function () {
     $peserta = UndianUmumLima::select('nomor_undian', 'id')->whereHas('pesertaUmumLima', function($q){
         $q->where('status', 0);
-    })->get(); // Mengambil 5 peserta secara acak
+    })->get();
     return response()->json(['message' => 'peserta undian ditemukan', 'peserta' => $peserta], Response::HTTP_OK);
 })->name('peserta-undian-lima');
 
@@ -227,14 +223,12 @@ Route::post('pemenang-undian-umum-lima/store', function (Request $request) {
                 ]);
             }
         }
-
-        //blokir rekening jika sudah menang
-        // $undian = UndianUmumLima::find($value);
-        // if (!empty($undian)) {
-        //     PesertaUmumLima::where('id', $undian->peserta_umum_lima_id)->update([
-        //         'status' => 1
-        //     ]);
-        // }
     }
     return response()->json('Berhasil');
 })->name('pemenang-undian-umum-lima.store');
+
+Route::get('pemenang-undian-umum-lima/print', function (Request $request) {
+    $undianumum = PemenangUndianUmumLima::with(['undian.pesertaUmumLima'])->orderBy('created_at', 'DESC')->get();
+    $pdf = PDF::loadView('pdf.pemenang-umum-lima', ['data' => $undianumum]);
+    return $pdf->stream('pemenangundianumumlima.pdf');
+})->name('pemenang-undian-umum-lima.print');

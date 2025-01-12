@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\PemenangUndianUmumLimaDataTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\PemenangUndianUmumDataTable;
 
 class PemenangUndianUmumLimaController extends Controller
 {
@@ -13,7 +13,7 @@ class PemenangUndianUmumLimaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PemenangUndianUmumDataTable $dataTable)
+    public function index(PemenangUndianUmumLimaDataTable $dataTable)
     {
         return $dataTable->render('admin.contents.pemenang_undian_umum_lima.index');
     }

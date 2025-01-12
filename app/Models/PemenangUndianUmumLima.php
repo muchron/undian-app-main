@@ -21,7 +21,7 @@ class PemenangUndianUmumLima extends Model
      */
     public function undian(): BelongsTo
     {
-        return $this->belongsTo(Undian::class, 'undian_id');
+        return $this->belongsTo(UndianUmumLima::class, 'undian_id');
     }
     
 

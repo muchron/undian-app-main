@@ -1,5 +1,23 @@
 @push('customScripts')
     <script>
+        let getDataToShuffle = [];
+
+        window.addEventListener('beforeunload', () => {
+            let timerInterval;
+            Swal.fire({
+                title: "Mohon Tunggu",
+                html: "Sedang memuat data",
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            })
+        })
+
         function generateDateNow() {
             const now = new Date();
             const year = now.getFullYear();
@@ -42,34 +60,45 @@
             return timeNow + ' WIB';
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             setInterval(() => {
                 $('#waktu').text(generateTimeNow())
             }, 1000);
             $('#tanggal').text(generateDateNow())
+            // Mengambil data peserta undian saat halaman di load pertamakali / refresh
+            getAllDataMember()
         });
 
-        let shuffleData;
-        function onShuffle() {
-            $.get(route('peserta-undian-lima'), (res) => {
-                const getDataToShuffle = res.peserta;
-                shuffleData = setInterval(() => {
-                    const randomIndices = [];
-                    const peserta = [];
-                    let number = 1;
-                    console.clear()
-                    while (randomIndices.length < 5) {
-                        const randomIndex = Math.floor(Math.random() * getDataToShuffle.length);
-                        if (!randomIndices.includes(randomIndex)) {
-                            randomIndices.push(randomIndex);
-                        }
-                        $(`#kode-acak-${number}`).text(getDataToShuffle[randomIndex].nomor_undian);
-                        $(`input[name=undian_id_${number}`).val(getDataToShuffle[randomIndex].id);
-                        number++;
-                    }
-                }, 50)
+        // Menambil data peserta undian
+        function getAllDataMember() {
+            $.ajax({
+                url: route('peserta-undian-lima'),
+                async: false,
+                success: function(res) {
+                    return getDataToShuffle = res.peserta
+                }
             })
+        }
 
+        let shuffleData;
+
+        function onShuffle() {
+
+            shuffleData = setInterval(() => {
+                const randomIndices = [];
+                const peserta = [];
+                let number = 1;
+                console.clear()
+                while (randomIndices.length < 5) {
+                    const randomIndex = Math.floor(Math.random() * getDataToShuffle.length);
+                    if (!randomIndices.includes(randomIndex)) {
+                        randomIndices.push(randomIndex);
+                    }
+                    $(`#kode-acak-${number}`).text(getDataToShuffle[randomIndex].nomor_undian);
+                    $(`input[name=undian_id_${number}`).val(getDataToShuffle[randomIndex].id);
+                    number++;
+                }
+            }, 100)
 
         }
 
@@ -78,9 +107,12 @@
             clearInterval(shuffleData);
             let resultOfShuffle = [];
             for (let i = 1; i <= 5; i++) {
-                const id =  $(`input[name=undian_id_${i}`).val();
+                const id = $(`input[name=undian_id_${i}`).val();
                 resultOfShuffle.push(id);
             }
+
+            console.log(resultOfShuffle);
+
             $.ajax({
                 url: route('peserta-undian-lima.detail'),
                 data: {
@@ -105,10 +137,16 @@
         function onSubmit() {
             // Collect all 5 winners' data
             let winners = [];
+
+            let people = [];
+
             for (let i = 1; i <= 5; i++) {
                 let undian_id = $(`input[name="undian_id_${i}"]`).val();
-                if (undian_id) {
+                let nama = $(`#nama-reward-${i}`).html();
+
+                if (undian_id && nama) {
                     winners.push(undian_id);
+                    people.push(nama);
                 }
             }
 
@@ -117,23 +155,31 @@
                     _token: '{{ csrf_token() }}',
                     undian_ids: winners
                 }
-                console.log(data);
-
                 $.ajax({
                     type: "POST",
                     url: route('pemenang-undian-umum-lima.store'),
                     data: data,
-                    error: function (res) {
+                    error: function(res) {
                         alert('Gagal menyimpan data pemenang')
                     },
-                    success: function (res) {
-                        alert('Berhasil menyimpan data pemenang')
+                    success: function(res) {
+                        // alert('Berhasil menyimpan data pemenang')
                         // Clear all input fields
                         for (let i = 1; i <= 5; i++) {
                             $(`input[name="undian_id_${i}"]`).val('')
                         }
                         loadTableUndianUmumLima()
                     }
+                }).done((response) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Selamat Atas Pemenang',
+                        html: `${people.map((val, index) => {
+                            return `${val}`
+                        }).join(', ')}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 });
             } else {
                 alert('Tidak ada data pemenang yang dipilih')
@@ -149,13 +195,13 @@
                 data: {
                     _token: '{{ csrf_token() }}'
                 },
-                beforeSend: function (res) {
+                beforeSend: function(res) {
                     $('#table-list-peserta').html('')
                 },
-                error: function (res) {
+                error: function(res) {
                     alert('error')
                 },
-                success: function (res) {
+                success: function(res) {
 
                     res.undianumumlima.forEach(val => { // Limit to 5 participants
 
@@ -174,7 +220,7 @@
             });
         }
 
-        document.addEventListener('keydown', function (event) {
+        document.addEventListener('keydown', function(event) {
             if (event.key === '1') {
                 onShuffle();
             } else if (event.key === '2') {
@@ -184,7 +230,7 @@
             }
         });
 
-        document.addEventListener('keydown', function (event) {
+        document.addEventListener('keydown', function(event) {
             if (event.key === '4') {
                 onSubmit();
             }

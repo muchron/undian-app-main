@@ -1,6 +1,4 @@
 @push('customScripts')
     {!! $dataTable->scripts() !!}
-    <script>
-
-    </script>
+    <script></script>
 @endpush

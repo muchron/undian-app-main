@@ -12,10 +12,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        {!! $dataTable->table([
-                            'id' => 'pemenangundianumumlima-table',
+                        {{ $dataTable->table([
+                            'id' => 'test-table',
                             'class' => 'table table-hover table-bordered table-striped',
-                        ]) !!}
+                        ]) }}
                     </div>
                 </div>
             </div>
