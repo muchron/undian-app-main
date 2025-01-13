@@ -12,7 +12,7 @@ class PemenangUndianUmumLima extends Model
     public $incrementing = false;
     protected $table = 'pemenang_undian_umum_lima';
     protected $fillable = [];
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
         /**
      * Get the undian that owns the PemenangUndianGrandprice

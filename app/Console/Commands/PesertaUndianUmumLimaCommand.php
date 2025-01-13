@@ -58,7 +58,6 @@ class PesertaUndianUmumLimaCommand extends Command
                     }
                     $no_peserta = $kode.'-'.$wilayah.'-'.$urutan.'-'.$unik;
                     UndianUmumLima::create([
-                        'id' => Str::uuid(),
                         'nomor_undian' => $no_peserta,
                         'nama_peserta' => $people->nama_peserta,
                         'peserta_umum_lima_id' => $people->id,

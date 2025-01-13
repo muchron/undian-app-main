@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class PesertaUmumLima extends Model
 {
     use HasFactory;
-    public $incrementing = false;
+    public $incrementing = true;
     protected $table = 'peserta_umum_lima';
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     /**
      * Get all of the undian for the PesertaUmum

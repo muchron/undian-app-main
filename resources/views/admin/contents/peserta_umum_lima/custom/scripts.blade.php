@@ -11,19 +11,39 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function(res) {
+                    Swal.fire({
+                        title: 'Mohon Menunggu',
+                        html: 'Sedang memuat data',
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    })
                     $('#btn-import').text('Mohon Menunggu')
                     $('#btn-import').prop('disabled', true)
                 },
                 error: function(res) {
                     $('#btn-import').text('Import Data Peserta')
                     $('#btn-import').prop('disabled', false)
-                    alert('gagal')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Data Peserta gagal diimport',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 },
                 success: function(res) {
                     $('input[name="file"]').val('')
                     $('#btn-import').text('Import Data Peserta')
                     $('#btn-import').prop('disabled', false)
-                    alert('berhasil')
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Peserta berhasil diimport',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     $('#pesertaumumlima-table').DataTable().ajax.reload()
                 }
             });
@@ -40,20 +60,20 @@
                     _token: '{{ csrf_token() }}',
                     peserta_umum_lima_id: id
                 },
-                beforeSend: function (res) {
+                beforeSend: function(res) {
                     $('#nomorundian-table>tbody').html('')
                 },
-                error: function (res) {
+                error: function(res) {
                     alert('error')
                 },
                 success: function(res) {
                     let no = 1
                     res.nomorundian.forEach(val => {
                         $('#nomorundian-table>tbody').append(
-                            '<tr>'+
-                                '<td>'+no+'</td>'+
-                                '<td>'+val.nomor_undian+'</td>'
-                            +'</tr>'
+                            '<tr>' +
+                            '<td>' + no + '</td>' +
+                            '<td>' + val.nomor_undian + '</td>' +
+                            '</tr>'
                         )
                         no++
                     });

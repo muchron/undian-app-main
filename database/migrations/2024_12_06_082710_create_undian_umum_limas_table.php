@@ -14,10 +14,12 @@ class CreateUndianUmumLimasTable extends Migration
     public function up()
     {
         Schema::create('undian_umum_lima', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->integer('id', true)->startingValue(10000);
+            $table->integer('peserta_umum_lima_id');
             $table->string('nomor_undian');
             $table->string('nama_peserta');
             $table->timestamps();
+            $table->foreign('peserta_umum_lima_id')->references('id')->on('peserta_umum_lima')->onDelete('cascade');
         });
     }
 

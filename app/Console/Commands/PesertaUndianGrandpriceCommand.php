@@ -58,7 +58,6 @@ class PesertaUndianGrandpriceCommand extends Command
                     }
                     $no_peserta = $kode.'-'.$wilayah.'-'.$urutan.'-'.$unik;
                     UndianGrandprice::create([
-                        'id' => Str::uuid(),
                         'nomor_undian' => $no_peserta,
                         'nama_peserta' => $people->nama_peserta,
                         'peserta_grandprice_id' => $people->id,

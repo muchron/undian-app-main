@@ -17,7 +17,6 @@ class PesertaUmumLima implements ToModel, WithHeadingRow, WithChunkReading, Shou
         $checkRegister = ModelsPesertaUmumLima::where('noreg', $row['noreg'])->first();
         if(empty($checkRegister)){
             return new ModelsPesertaUmumLima([
-                'id' => Str::uuid(),
                 'noreg'  => $row['noreg'],
                 'nik' => $row['nik'],
                 'nama_peserta' => $row['nama'],

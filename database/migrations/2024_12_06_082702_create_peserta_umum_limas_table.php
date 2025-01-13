@@ -14,7 +14,7 @@ class CreatePesertaUmumLimasTable extends Migration
     public function up()
     {
         Schema::create('peserta_umum_lima', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->integer('id', true)->startingValue(10000);
             $table->string('noreg');
             $table->string('nik');
             $table->string('nama_peserta');

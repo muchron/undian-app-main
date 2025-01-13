@@ -12,7 +12,7 @@
     </li>
 
     <!-- Undian Umum -->
-    <li class="menu-item {{ request()->routeIs('admin.peserta-umum.index') || request()->routeIs('admin.pemenang-undian-umum.index') ? 'active open' : '' }}">
+    {{-- <li class="menu-item {{ request()->routeIs('admin.peserta-umum.index') || request()->routeIs('admin.pemenang-undian-umum.index') ? 'active open' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bxs-data"></i>
             <div data-i18n="Undian Umum">Undian Umum</div>
@@ -30,7 +30,7 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> --}}
 
     <!-- Undian Grand Price -->
     <li class="menu-item {{ request()->routeIs('admin.peserta-grandprice.index') || request()->routeIs('admin.pemenang-undian-grandprice.index') ? 'active open' : '' }}">

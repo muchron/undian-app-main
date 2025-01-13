@@ -14,9 +14,10 @@ class CreatePemenangUndianUmumLimasTable extends Migration
     public function up()
     {
         Schema::create('pemenang_undian_umum_lima', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('undian_id');
+            $table->id()->startingValue(10000);
+            $table->integer('undian_id');
             $table->timestamps();
+            $table->foreign('undian_id')->references('id')->on('undian_umum_lima')->onDelete('cascade');
         });
     }
 

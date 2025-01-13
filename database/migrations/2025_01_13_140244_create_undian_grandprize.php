@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUndiansTable extends Migration
+class CreateUndianGrandprize extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateUndiansTable extends Migration
      */
     public function up()
     {
-        Schema::create('undian', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('undian_grandprice', function (Blueprint $table) {
+            $table->integer('id', true)->startingValue(10000);
+            $table->integer('peserta_grandprice_id');
             $table->string('nomor_undian');
             $table->string('nama_peserta');
             $table->timestamps();
+            $table->foreign('peserta_grandprice_id')->references('id')->on('peserta_grandprice')->onDelete('cascade');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateUndiansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('undian');
+        Schema::dropIfExists('undian_grandprice');
     }
 }

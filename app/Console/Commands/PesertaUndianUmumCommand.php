@@ -59,7 +59,6 @@ class PesertaUndianUmumCommand extends Command
                     }
                     $no_peserta = $kode.'-'.$wilayah.'-'.$urutan.'-'.$unik;
                     Undian::create([
-                        'id' => Str::uuid(),
                         'nomor_undian' => $no_peserta,
                         'nama_peserta' => $people->nama_peserta,
                         'peserta_umum_id' => $people->id,

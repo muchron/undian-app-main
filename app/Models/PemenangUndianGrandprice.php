@@ -11,7 +11,7 @@ class PemenangUndianGrandprice extends Model
     use HasFactory;
     public $incrementing = false;
     protected $table = 'pemenang_undian_grandprice';
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     /**
      * Get the undian that owns the PemenangUndianGrandprice

@@ -208,7 +208,6 @@ Route::post('pemenang-undian-umum-lima', function () {
 Route::post('pemenang-undian-umum-lima/store', function (Request $request) {
     foreach ($request->undian_ids as $id => $value) {
         PemenangUndianUmumLima::create([
-            'id' => Str::uuid(),
             'undian_id' => $value,
         ]);
 

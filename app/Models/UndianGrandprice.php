@@ -13,7 +13,7 @@ class UndianGrandprice extends Model
     use HasFactory;
     public $incrementing = false;
     protected $table= 'undian_grandprice';
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
 
     /**
