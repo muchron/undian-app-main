@@ -38,7 +38,7 @@
                 <div id="text-congratulation">Selamat Kepada</div>
                 <div id="text-congratulation">Pemenang Hadiah GrandPrize :</div>
                 <div id="list-reward">
-                    <div style="overflow-y: auto; height: 500px; padding-top: 10px;">
+                    <div style="overflow-y: auto; height: 400px; padding-top: 10px;">
                         <table id="table-list-peserta"></table>
                     </div>
                     <a href="{{ route('pemenang-undian-grandprice.print') }}" target="_blank" class="btn btn-success mt-2">Cetak/Print</a>

@@ -22,18 +22,27 @@
                 <div class="text-center mb-3" id="image-gold">
                     <div class="slideshow-container">
                         <div class="mySlides fade">
-                            <img src="{{ asset('assets/img/contents/emas.png') }}" alt="Emas" width="300">
+                            <img src="{{ asset('assets/img/contents/3.png') }}" alt="Emas" width="300">
                         </div>
                         <div class="mySlides fade">
-                            <img src="{{ asset('assets/img/contents/emas1.png') }}" alt="Emas2" width="300">
+                            <img src="{{ asset('assets/img/contents/4.png') }}" alt="Emas2" width="300">
                         </div>
                         <div class="mySlides fade">
-                            <img src="{{ asset('assets/img/contents/emas2.png') }}" alt="Emas3" width="300">
+                            <img src="{{ asset('assets/img/contents/5.png') }}" alt="Emas3" width="300">
+                        </div>
+                        <div class="mySlides fade">
+                            <img src="{{ asset('assets/img/contents/6.png') }}" alt="Emas3" width="300">
+                        </div>
+                        <div class="mySlides fade">
+                            <img src="{{ asset('assets/img/contents/1.png') }}" alt="Emas3" width="300">
+                        </div>
+                        <div class="mySlides fade">
+                            <img src="{{ asset('assets/img/contents/2.png') }}" alt="Emas3" width="300">
                         </div>
                     </div>
                 </div>
                 <ul>
-                    <li><span class="text-reward" style="font-size: 25px;">Antam 5gr X 2 Keping :</span> <br> <span class="text-senilai" style="font-size: 18px;">Senilai Rp 13.704.176,00</span></li>
+                    <li><span class="text-reward" style="font-size: 25px;">Antam 5gr X 2 Keping :</span> <br> <span class="text-senilai" style="font-size: 18px;">Total Hadiah Senilai Rp 14.000.000,00</span></li>
                 </ul>
             </div>
             <div id="tengah">
@@ -46,18 +55,27 @@
                 <div class="text-center mb-3" id="image-gold">
                     <div class="slideshow-container">
                         <div class="mySlides2 fade">
-                            <img src="{{ asset('assets/img/contents/emas.png') }}" alt="Emas" width="300">
+                            <img src="{{ asset('assets/img/contents/1.png') }}" alt="Emas1" width="300">
                         </div>
                         <div class="mySlides2 fade">
-                            <img src="{{ asset('assets/img/contents/emas1.png') }}" alt="Emas2" width="300">
+                            <img src="{{ asset('assets/img/contents/2.png') }}" alt="Emas2" width="300">
                         </div>
                         <div class="mySlides2 fade">
-                            <img src="{{ asset('assets/img/contents/emas2.png') }}" alt="Emas3" width="300">
+                            <img src="{{ asset('assets/img/contents/3.png') }}" alt="Emas3" width="300">
+                        </div>
+                        <div class="mySlides2 fade">
+                            <img src="{{ asset('assets/img/contents/4.png') }}" alt="Emas4" width="300">
+                        </div>
+                        <div class="mySlides2 fade">
+                            <img src="{{ asset('assets/img/contents/5.png') }}" alt="Emas5" width="300">
+                        </div>
+                        <div class="mySlides2 fade">
+                            <img src="{{ asset('assets/img/contents/6.png') }}" alt="Emas6" width="300">
                         </div>
                     </div>
                 </div>
                 <ul>
-                    <li><span class="text-reward" style="font-size: 25px;">Antam 1gr X 25 Keping :</span> <br> <span class="text-senilai" style="font-size: 18px;">Senilai Rp 35.388.250,00</span></li>
+                    <li><span class="text-reward" style="font-size: 25px;">Antam 1gr X 25 Keping :</span> <br> <span class="text-senilai" style="font-size: 18px;">Total Hadiah Senilai Rp 35.500.000,00</span></li>
                 </ul>
             </div>
         </div>
