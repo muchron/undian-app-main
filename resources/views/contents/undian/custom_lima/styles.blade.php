@@ -6,6 +6,7 @@
             height: 70%;
             margin: 0 45px;
             border-radius: 5px;
+            margin-top: 50px;
         }
         #kolom{
             display: flex;
@@ -41,7 +42,7 @@
         #reward, #text-congratulation{
             font-size: 25px;
             font-weight: bold;
-            color: rgb(197, 128, 0);
+            color: black;
         }
         .text-reward{
             font-size: 14px;

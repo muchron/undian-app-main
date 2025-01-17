@@ -1,35 +1,22 @@
 @push('styleCss')
     <style>
         #heading {
-            /* background: linear-gradient(to right, rgb(45, 110, 120), rgb(229, 187, 53)); */
-            /* background: radial-gradient(circle, rgb(45, 110, 120), rgb(229, 187, 53)); */
-            /* background: conic-gradient(from 45deg, rgb(45, 110, 120), rgb(229, 187, 53)); */
-            /* background: repeating-linear-gradient(45deg, rgb(45, 110, 120), rgb(229, 187, 53) 10%); */
-            /* background: repeating-radial-gradient(circle, rgb(45, 110, 120), rgb(229, 187, 53) 10%); */
-            background: linear-gradient(to bottom, rgb(45, 110, 120), rgb(229, 187, 53));
-            height: auto;
-            border-bottom-left-radius: 45%;
-            border-bottom-right-radius: 45%;
+            /* border: 2px orange solid; */
+            width: 80%;
+            height: 100%;
+            margin: 0 45px;
+            border-radius: 5px;
+            margin-top: 30px;
         }
 
         #text-heading {
-            font-size: 18px;
+            font-size: 36px;
             color: white;
             text-align: center;
             font-weight: bold;
-            padding-left: 10px;
+            padding-left: 300px;
             padding-right: 10px;
-
-        }
-
-        #text-subheading {
-            font-size: 18px;
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 20px;
+            padding-top: 25px;
         }
 
         #kolom {
@@ -40,13 +27,13 @@
         }
 
         #kiri {
-            width: 25%;
+            width: 24%;
             border: 2px rgb(229, 187, 53) solid;
             margin-left: 10px;
             margin-right: 10px;
             padding: 10px;
             border-radius: 5px;
-            max-height: 450px;
+            max-height: 650px;
         }
 
         #tengah {
@@ -60,13 +47,13 @@
         }
 
         #kanan {
-            width: 25%;
+            width: 24%;
             border: 2px rgb(229, 187, 53) solid;
             margin-left: 10px;
             margin-right: 10px;
             padding: 10px;
             border-radius: 5px;
-            max-height: 450px;
+            max-height: 350px;
         }
 
         #kode-acak {

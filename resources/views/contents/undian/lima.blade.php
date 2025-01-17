@@ -7,7 +7,7 @@
     <section id="header">
         <div id="heading">
             <div class="text-center pt-2">
-                <img src="{{ asset('assets/img/logo/bg-header-2.jpg') }}" alt="logo">
+                <img src="{{ asset('assets/img/logo/bg-header-1.jpg') }}" alt="logo">
             </div>
         </div>
     </section>
@@ -17,10 +17,10 @@
             <div id="tengah">
                 <div id="kode-acak">
                     <span id="kode-acak-1">000-000-00000-0000</span><br>
-                    <span id="kode-acak-2">000-000-00000-0000</span><br>
-                    <span id="kode-acak-3">000-000-00000-0000</span><br>
-                    <span id="kode-acak-4">000-000-00000-0000</span><br>
-                    <span id="kode-acak-5">000-000-00000-0000</span>
+                    {{-- <span id="kode-acak-2">000-000-00000-0000</span><br> --}}
+                    {{-- <span id="kode-acak-3">000-000-00000-0000</span><br> --}}
+                    {{-- <span id="kode-acak-4">000-000-00000-0000</span><br> --}}
+                    {{-- <span id="kode-acak-5">000-000-00000-0000</span> --}}
                 </div>
                 <div id="button-menu">
                     <div id="button-acak-off" onclick="onShuffle()" style="cursor:pointer"><strong>MULAI</strong></div>
@@ -33,27 +33,27 @@
                 </div>
                 <div id="peserta-reward">
                     <input type="hidden" name="undian_id_1">
-                    <span id="kode-acak-1"></span>
+                    {{-- <span id="kode-acak-1"></span> --}}
                     <span id="noreg-reward-1">000-000-00000-0000</span>
                     <span id="nama-reward-1">Nama Peserta</span> <br>
 
                     <input type="hidden" name="undian_id_2">
-                    <span id="kode-acak-2"></span>
+                    {{-- <span id="kode-acak-2"></span> --}}
                     <span id="noreg-reward-2">000-000-00000-0000</span>
                     <span id="nama-reward-2">Nama Peserta</span> <br>
 
                     <input type="hidden" name="undian_id_3">
-                    <span id="kode-acak-3"></span>
+                    {{-- <span id="kode-acak-3"></span> --}}
                     <span id="noreg-reward-3">000-000-00000-0000</span>
                     <span id="nama-reward-3">Nama Peserta</span> <br>
 
                     <input type="hidden" name="undian_id_4">
-                    <span id="kode-acak-4"></span>
+                    {{-- <span id="kode-acak-4"></span> --}}
                     <span id="noreg-reward-4">000-000-00000-0000</span>
                     <span id="nama-reward-4">Nama Peserta</span> <br>
 
                     <input type="hidden" name="undian_id_5">
-                    <span id="kode-acak-5"></span>
+                    {{-- <span id="kode-acak-5"></span> --}}
                     <span id="noreg-reward-5">000-000-00000-0000</span>
                     <span id="nama-reward-5">Nama Peserta</span> <br>
                 </div>

@@ -15,7 +15,7 @@
             slideIndex++;
             if (slideIndex > slides.length) {slideIndex = 1}
             slides[slideIndex-1].style.display = "block";
-            setTimeout(showSlides, 2000); // Ganti gambar setiap 2 detik
+            setTimeout(showSlides, 3000); // Ganti gambar setiap 3 detik
         }
         
         function showSlides2() {
@@ -27,7 +27,7 @@
             slideIndex2++;
             if (slideIndex2 > slides.length) {slideIndex2 = 1}
             slides[slideIndex2-1].style.display = "block";
-            setTimeout(showSlides2, 2000); // Ganti gambar setiap 2 detik
+            setTimeout(showSlides2, 3000); // Ganti gambar setiap 3 detik
         }
     </script>
 @endpush

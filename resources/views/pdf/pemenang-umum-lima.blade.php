@@ -13,10 +13,9 @@
         <label><Strong>HADIAH UMUM</Strong></label>
     </div>
     <div>
-        <p>Dilaksanakan pada hari Senin, tanggal 20 Januari 2025 di Kantor Pusat PT Jasa Gadai Syariah </p>
-        <p>Jl. Dr. Cipto No. 88 Pekalongan pukul xx.xx WIB</p>
-        <br>
-        <p>Dihadiri oleh Direksi, Kepala unit dan perwakilan Nasabah. </p>
+        <p style="font-size: 12px;">Dilaksanakan pada hari Senin, tanggal 20 Januari 2025 di Kantor Pusat PT Jasa Gadai Syariah </p>
+        <p style="font-size: 12px;">Jl. Dr. Cipto No. 88 Pekalongan pukul {{ Carbon\Carbon::now()->format('H:i:s') }} WIB</p>
+        <p style="font-size: 12px;">Dihadiri oleh Direksi, Kepala unit dan perwakilan Nasabah. </p>
     </div>
     <hr />
     <table border="1">
@@ -26,7 +25,7 @@
                 <th>Nomor Undian</th>
                 <th>Nama</th>
                 <th>NIK</th>
-                <th>Tanggal Lahir</th>
+                {{-- <th>Tanggal Lahir</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -39,20 +38,43 @@
                     <td>{{ $value['undian']['nomor_undian'] }}</td>
                     <td>{{ $value['undian']['nama_peserta'] }}</td>
                     <td>{{ $value['undian']['pesertaUmumLima']['nik'] }}</td>
-                    <td>{{ date('d-m-Y', strtotime($value['undian']['pesertaUmumLima']['tanggal_lahir'])) }}</td>
+                    {{-- <td>{{ date('d-m-Y', strtotime($value['undian']['pesertaUmumLima']['tanggal_lahir'])) }}</td> --}}
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div>
-        <p>Demikian berita acara dibuat pada hari dan tanggal tersebut diatas.</p>
+        <p style="font-size: 12px;">Demikian berita acara dibuat pada hari dan tanggal tersebut diatas.</p>
     </div>
-    <br>
-    <br>
-    <br>
     <br>
     <div class="text-center" style="margin: 0 auto; width: 100%;">
-        <p class="text-center" style="text-align: center; margin: 0;">Pekalongan, 20 Januari 2025</p>
-        <p class="text-center" style="text-align: center; margin: 5px 0;">PT Jasa Gadai Syariah</p>
+        <p class="text-center" style="text-align: center; margin: 0; font-size: 12px;">Pekalongan, 20 Januari 2025</p>
+        <p class="text-center" style="text-align: center; margin: 5px 0; font-size: 12px;">PT Jasa Gadai Syariah</p>
     </div>
+    <table id="second-table" style="width: 100%; text-align: center;">
+        <tr>
+            <td style="width: 50%; padding: 40px; text-align: center;"></td>
+            <td style="width: 50%; padding: 40px; text-align: center;"></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><span style="border-bottom: 1px solid black; padding: 10px;">Sanyoto</span></td>
+            <td style="text-align: center;"><span style="border-bottom: 1px solid black; padding: 10px;">Rizqa Shafira Putri</span></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">Direktur Utama</td>
+            <td style="text-align: center;">Direktur</td>
+        </tr>
+    </table>
+    <table id="second-table" style="width: 100%; text-align: center;">
+        <tr>
+            <td style="width: 33.33%; padding: 40px; text-align: center;"></td>
+            <td style="width: 33.33%; padding: 40px; text-align: center;"></td>
+            <td style="width: 33.33%; padding: 40px; text-align: center;"></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><div style="width: 4cm; margin: 0 auto; border-top: 1px solid black; padding: 10px;">Saksi I</div></td>
+            <td style="text-align: center;"><div style="width: 4cm; margin: 0 auto; border-top: 1px solid black; padding: 10px;">Saksi II</div></td>
+            <td style="text-align: center;"><div style="width: 4cm; margin: 0 auto; border-top: 1px solid black; padding: 10px;">Saksi III</div></td>
+        </tr>
+    </table>
 @endsection
