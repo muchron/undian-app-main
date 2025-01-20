@@ -11,7 +11,7 @@ class PesertaUmum extends Model
     use HasFactory;
     public $incrementing = false;
     protected $table = 'peserta_umum';
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     /**
      * Get all of the undian for the PesertaUmum

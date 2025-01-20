@@ -9,7 +9,7 @@
             <div class="text-center pt-2">
                 <img src="{{ asset('assets/img/logo/bg-header.jpg') }}" alt="logo">
             </div>
-            <div id="text-heading" style="color: black; font-family:">ACARA PENGUNDIAN GEBYAR AKHIR TAHUN</div>
+            {{-- <divx` id="text-heading" style="color: black; font-family:">ACARA PENGUNDIAN GEBYAR AKHIR TAHUN</div> --}}
         </div>
     </section>
 

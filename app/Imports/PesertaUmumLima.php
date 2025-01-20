@@ -7,12 +7,15 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\PesertaUmumLima as ModelsPesertaUmumLima;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\RemembersRowNumber;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 class PesertaUmumLima implements ToModel, WithHeadingRow, WithChunkReading, ShouldQueue
 {
+    use RemembersRowNumber;
     public function model(array $row)
     {
+        $currentRowNumber = $this->getRowNumber();
         $tanggal = \Carbon\Carbon::createFromFormat('d/m/Y', $row['tanggal_lahir'])->format('Y-m-d');
         $checkRegister = ModelsPesertaUmumLima::where('noreg', $row['noreg'])->first();
         if(empty($checkRegister)){

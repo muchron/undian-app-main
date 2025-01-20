@@ -7,17 +7,19 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\PesertaGrandPrice as ModelsPesertaGrandPrice;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\RemembersRowNumber;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 class PesertaGrandPrice implements ToModel, WithHeadingRow, WithChunkReading, ShouldQueue
 {
+    use RemembersRowNumber;
     public function model(array $row)
     {
+        $currentRowNumber = $this->getRowNumber();
         $tanggal = \Carbon\Carbon::createFromFormat('d/m/Y', $row['tanggal_lahir'])->format('Y-m-d');
         $checkRegister = ModelsPesertaGrandPrice::where('noreg', $row['noreg'])->first();
         if(empty($checkRegister)){
             return new ModelsPesertaGrandPrice([
-                'id' => Str::uuid(),
                 'noreg'  => $row['noreg'],
                 'nik' => $row['nik'],
                 'nama_peserta' => $row['nama'],
@@ -38,6 +40,6 @@ class PesertaGrandPrice implements ToModel, WithHeadingRow, WithChunkReading, Sh
      */
     public function chunkSize(): int
     {
-        return 1000;
+        return 2649;
     }
 }
